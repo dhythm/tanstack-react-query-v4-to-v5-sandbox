@@ -1,0 +1,20 @@
+name: "Yarn install with cache"
+description: "Install dependencies with yarn and cache the result"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v3
+      id: yarn-cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/.node-version') }}
+    - name: yarn install
+      run: |
+        if echo ${{ steps.yarn-cache.outputs.cache-hit }} | grep -c "true"
+        then
+          echo "Cache hit"
+        else
+          yarn install
+        fi
+      shell: bash

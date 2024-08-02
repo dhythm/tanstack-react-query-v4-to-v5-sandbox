@@ -1,0 +1,14 @@
+name: "Run tests"
+on:
+  pull_request:
+
+jobs:
+  task-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - uses: ./.github/actions/yarn-install-with-cache
+      - name: Run tests
+        run: |
+          yarn run test
