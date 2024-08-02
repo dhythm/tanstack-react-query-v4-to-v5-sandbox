@@ -14,4 +14,6 @@ yarn add -D @tanstack/react-query-devtools@^4.36.1
 ```sh
 yarn add -D @testing-library/jest-dom@^6.4.2 @testing-library/react@13.4.0
 yarn add -D jest@29.7.0
+
+yarn create jest@latest
 ```
