@@ -15,6 +15,7 @@ yarn add -D @tanstack/react-query-devtools@^4.36.1
 yarn add -D @testing-library/jest-dom@^6.4.2 @testing-library/react@13.4.0
 yarn add -D jest@29.7.0
 yarn add -D @types/jest jest-environment-jsdom ts-jest ts-node
+yarn add -D cross-fetch
 
 yarn create jest@latest
 ```
