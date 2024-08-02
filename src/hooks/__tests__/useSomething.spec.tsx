@@ -13,18 +13,39 @@ test("useSomething gets an api response", async () => {
     },
     {
       wrapper: ({ children }) => (
-        <QueryClientProvider client={new QueryClient()}>
+        <QueryClientProvider
+          client={
+            new QueryClient({
+              defaultOptions: {
+                queries: {
+                  retry: false,
+                },
+              },
+            })
+          }
+        >
           {children}
         </QueryClientProvider>
       ),
     }
   );
+
   await waitFor(() => {
     expect(result.current.isLoading).toBeTruthy();
   });
-  expect(result.current.isLoading).toBe(true);
+
   await waitFor(() => {
     expect(result.current.isLoading).toBe(false);
   });
-  expect(result.current.data).toEqual({});
+
+  expect(result.current.data).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        id: expect.any(String),
+        url: expect.any(String),
+        width: expect.any(Number),
+        height: expect.any(Number),
+      }),
+    ])
+  );
 });
