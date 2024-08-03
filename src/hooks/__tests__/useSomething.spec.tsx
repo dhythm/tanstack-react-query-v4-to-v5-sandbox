@@ -5,9 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 test("useSomething gets an api response", async () => {
   const { result } = renderHook(
     () => {
-      const { data, isLoading } = useSomething();
+      const { data, isPending } = useSomething();
       return {
-        isLoading,
+        isPending,
         data,
       };
     },
@@ -31,11 +31,11 @@ test("useSomething gets an api response", async () => {
   );
 
   await waitFor(() => {
-    expect(result.current.isLoading).toBeTruthy();
+    expect(result.current.isPending).toBeTruthy();
   });
 
   await waitFor(() => {
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isPending).toBe(false);
   });
 
   expect(result.current.data).toEqual(
